@@ -1,6 +1,8 @@
 package co.com.choucair.certification.proyectobase.stepdefinitions;
 
+import co.com.choucair.certification.proyectobase.tasks.Login;
 import co.com.choucair.certification.proyectobase.tasks.OpenUp;
+import co.com.choucair.certification.proyectobase.tasks.Search;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -15,12 +17,15 @@ public class ChoucairAcademyStepDefinitions {
 
     @Given("^than Alexander wants to learn automation at the academy Choucair$")
     public void thanAlexanderWantsToLearnAutomationAtTheAcademyChoucair() {
-        OnStage.theActorCalled("Alexander").wasAbleTo(OpenUp.thePage());
+        OnStage.theActorCalled("Alexander").wasAbleTo(
+                OpenUp.thePage(),
+                Login.onThePage());
 
     }
 
-    @When("^he search for the course Recursos Atomatizacion Bancolombia on the Choucair Academy platform$")
-    public void heSearchForTheCourseRecursosAtomatizacionBancolombiaOnTheChoucairAcademyPlatform() {
+    @When("^he search for the course (.*) on the Choucair Academy platform$")
+    public void heSearchForTheCourseRecursosAtomatizacionBancolombiaOnTheChoucairAcademyPlatform(String course) {
+        OnStage.theActorInTheSpotlight().attemptsTo(Search.the(course));
     }
 
 
